@@ -1,4 +1,4 @@
-# TENSORFLOW-NVIDIA-GPU-DOCKER
+# Setting up a server for ML in TensorFlow with GPU and Jupyter
 
 #### Install NVIDIA driver
 
