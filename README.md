@@ -2,15 +2,14 @@
 
 If one is neither an engineer nor a developer &ndash; and maybe even then &ndash; setting up a working system for machine learning, using NVIDIA GPU, alongside other packages is tricky. There is huge complexity in terms of cross-compatibilities between the various components, and I got stuck at one point or another with most tutorials I found. For what it is worth, this is a setup that worked for me, where the key turned out to be [Docker](https://www.docker.com/).
 
-#### Step 1: Install NVIDIA driver
+### Step 1: Install NVIDIA driver
 
 1. In a computer, with a physical NVIDIA GPU mounted, make a clean install of Ubuntu 20.04 (During the install process: opt to install ssh; opt to install docker).
 2. Follow NVIDIA's driver [installation instructions for Ubuntu](https://docs.nvidia.com/datacenter/tesla/tesla-installation-notes/index.html#ubuntu-lts)
 3. Reboot and check the driver installation with the `nvidia-smi` command. You should see info about your operational GPU.
 4. Follow NVIDIA’s [post-installation-steps](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions ) (I only did the ‘mandatory’ steps).
 
-
-#### Step 2: Test the system with the NVIDIA docker container
+### Step 2: Test the system with the NVIDIA docker container
 
 Based on [these instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker).
 
