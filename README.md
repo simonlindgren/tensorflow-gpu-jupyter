@@ -36,7 +36,6 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 sudo systemctl restart docker
 ````
 
-
 4. Run the `nvidia-smi` command through `nvidia-docker`:
 
 ```
@@ -47,10 +46,11 @@ You are likely to get a response similar to: `Unable to find image 'nvidia/cuda:
 
 When the test command above gives the same output as a simple `nvidia-smi` (without docker), things are correctly set up.
 
+----
 
-#### Running Docker images
+### Step 3: Running Docker images
 
-The stuff above allowed us to run GPU diagnostics (`nvidia-smi`), but we want to perform actual TensorFlow runs on the GPU. The following steps are based on [this tutorial](https://blog.softwaremill.com/setting-up-tensorflow-with-gpu-acceleration-the-quick-way-add80cd5c988).
+The previous step allowed us to run GPU diagnostics (`nvidia-smi`), but we want to perform actual TensorFlow runs on the GPU. The following steps are based on [this tutorial](https://blog.softwaremill.com/setting-up-tensorflow-with-gpu-acceleration-the-quick-way-add80cd5c988).
 
 1. We want to use the [official TensorFlow docker images](https://hub.docker.com/r/tensorflow/tensorflow).
 2. We can start a Python prompt within that image by:
@@ -69,17 +69,15 @@ sudo docker run -it --rm --gpus all tensorflow/tensorflow:latest-gpu python
 >>> tf.config.experimental.list_physical_devices('GPU')
 ```
 
-4. We want to run TensorFlow with the GPU, and with Jupyter, so we will use the docker image `tensorflow/tensorflow:latest-gpu-jupyter`. We will run that image, which will launch Jupyter on the port we specify (`8888`) . The command below will also assume that a subdirectory named `notebooks` exists in the directory from which the command is run. That subdirectory will be linked into the Docker image.
+4. In my case, I wanted to run TensorFlow with the GPU, and with Jupyter, so I used the docker image `tensorflow/tensorflow:latest-gpu-jupyter`. We will run that image, which will launch Jupyter on the port we specify (`8888`) . The command below will also assume that a subdirectory named `notebooks` exists in the directory from which the command is run. That subdirectory will be linked into the Docker image.
 
-	For correct permission to the mounted directory, we must run the command below as root, so first `sudo -i`, then:
-
-
+For correct permission to the mounted directory, we must run the command below as root, so first `sudo -i`, then:
 
 ```
 docker run -u $(id -u):$(id -g) -it  --rm --gpus all -p 8888:8888 -v notebooks:/tf/notebooks:z tensorflow/tensorflow:latest-gpu-jupyter
 ```
 
 -	It will start a Jupyter server
-	-	Copy the url which is something like `http://127.0.0.1:8888/?token=60fad0100bb27135d49b35110770e25ed42faf2df13e1427` 
-	-	Tunnel into the server with ssh: `ssh -NL 8888:localhost:8888 simon@192.168.1.34` from user terminal.
-	-	On user terminal, paste the copied url into the browser.
+	-	Copy the url which is something like `http://127.0.0.1:8888/?token=98fda09f8s90df8s09df8sd9d` 
+	-	Tunnel into the server with ssh: `ssh -NL 8888:localhost:8888 <user>@<ip-address>` from your non-server computer.
+	-	On the non-server computer, paste the copied url into the browser to run Jupyter.
