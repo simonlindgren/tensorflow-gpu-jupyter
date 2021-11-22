@@ -1,8 +1,10 @@
 # Setting up a server for ML in TensorFlow with GPU and Jupyter
 
-#### Install NVIDIA driver
+If one is neither an engineer nor a developer &ndash; and maybe even then &ndash; setting up a working system for machine learning, using NVIDIA GPU, alongside other packages is tricky. There is huge complexity in terms of cross-compatibilities between the various components, and I got stuck at one point or another with most tutorials I found. For what it is worth, this is a setup that worked for me, where the key turned out to be [Docker](https://www.docker.com/).
 
-1. Make a clean install of Ubuntu 20.04 (choose to install ssh; choose to install docker)
+#### Step 1: Install NVIDIA driver
+
+1. In a computer, with a physical NVIDIA GPU mounted, make a clean install of Ubuntu 20.04 (During the install proceess: opt to install ssh; opt to install docker).
 2. Follow NVIDIA's driver [installation instructions for Ubuntu](https://docs.nvidia.com/datacenter/tesla/tesla-installation-notes/index.html#ubuntu-lts)
 3. Reboot and check installation with `nvidia-smi` command
 4. Follow NVIDIA’s [post-installation-steps](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions ) (I only did the ‘mandatory’)
